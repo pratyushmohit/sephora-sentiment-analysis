@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "\nStarting Sephora Sentiment Analysis..."
 
-# uvicorn sentiment_analysis.main:app --reload
+python -m uvicorn sentiment_analysis.main:app --reload

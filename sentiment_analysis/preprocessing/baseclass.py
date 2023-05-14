@@ -26,5 +26,21 @@ class BasePreprocessor(ABC):
         pass
 
     @abstractmethod
+    def preprocess_y(self) -> None:
+        pass
+
+    @abstractmethod
+    async def tokenization(self) -> None:
+        pass
+
+    @abstractmethod
+    async def glove_embedding(self) -> None:
+        pass
+
+    @abstractmethod
+    async def padding(self) -> None:
+        pass
+
+    @abstractmethod
     async def save_data(self) -> None:
         pass

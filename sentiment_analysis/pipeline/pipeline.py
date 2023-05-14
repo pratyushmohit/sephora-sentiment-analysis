@@ -6,6 +6,7 @@ import pandas as pd
 
 from sentiment_analysis.pipeline.baseclass import BasePipeline
 from sentiment_analysis.preprocessing.preprocessing import Preprocessor
+from sentiment_analysis.model.model import SentimentAnalysisModel
 
 
 class Pipeline(BasePipeline):
@@ -105,4 +106,13 @@ class Pipeline(BasePipeline):
         return output
 
     def model_pipeline(self):
-        pass
+        print(self.input)
+        embeddings = self.input["embeddings"]
+        sequences = self.input["sequences"]
+        numerical_feature = self.input["numerical_feature"]
+        class_label = self.input["class_label"]
+
+        with open('data_config.json') as json_file:
+            data_config = json.load(json_file)
+        
+        model = SentimentAnalysisModel()

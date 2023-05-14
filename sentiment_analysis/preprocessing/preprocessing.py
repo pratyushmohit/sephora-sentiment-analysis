@@ -66,10 +66,15 @@ class Preprocessor(BasePreprocessor):
         return batch_output
     
     def preprocess_categorical(self, batch, feature):
+        batch_output = []
         batch = batch[feature]
-        batch = re.sub('\W+',' ', batch)
-        batch = batch.lower()
-        return batch
+
+        for item in tqdm(batch):
+            item = re.sub('\W+','_', item)
+            item = item.lower()  
+            batch_output.append(item)
+
+        return batch_output
 
     def preprocess_numerical(self, batch, feature):
         batch = batch[feature]

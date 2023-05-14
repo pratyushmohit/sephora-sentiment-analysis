@@ -1,2 +1,8 @@
 # sephora-sentiment-analysis
 Sentiment Analysis on the Sephora Product and Skincare Reviews
+
+![Sephora Sentiment Analyis](blob\cover.jpg)
+
+1. Download Sephora Products and Skincare Reviews dataset [here](https://www.kaggle.com/datasets/nadyinky/sephora-products-and-skincare-reviews). 
+
+2. Download GloVe (Global Vectors for Word Representation) [here](https://nlp.stanford.edu/projects/glove/). Please download the 840B version of GloVe and copy it into the preprocessing folder. If you would like to download a smaller version of GloVe, please do so but update the glove_embedding() method in the Preprocessor class with the correct file.

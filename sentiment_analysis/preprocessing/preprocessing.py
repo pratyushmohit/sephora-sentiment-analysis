@@ -1,9 +1,15 @@
-from sentiment_analysis.preprocessing.baseclass import BasePreprocessor
-import pandas as pd
-from sklearn.model_selection import train_test_split
 import re
+
 import contractions
+import pandas as pd
+import tensorflow as tf
+from keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.text import Tokenizer
+from keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
 from tqdm import tqdm
+
+from sentiment_analysis.preprocessing.baseclass import BasePreprocessor
 
 
 class Preprocessor(BasePreprocessor):
@@ -64,9 +70,7 @@ class Preprocessor(BasePreprocessor):
     def preprocess_numerical(self, feature_vector):
         return feature_vector
     
-    def save_data(self, data, filname):
-        if type(data) == list:
-            data = pd.DataFrame(data)
-            path = f"sentiment_analysis\data\preprocessed_data\ + {filname}"
-            data.to_csv(path)
+    def save_data(self, dataframe, filname):
+        path = f"sentiment_analysis\data\preprocessed_data\{filname}"
+        dataframe.to_csv(path)
         return f"Data saved to {path}"

@@ -1,10 +1,14 @@
 import json
 import os
+
 import pandas as pd
-from . import app
 from fastapi import Response
+
 from sentiment_analysis.data_model import PreprocessItem
 from sentiment_analysis.preprocessing.preprocessing import Preprocessor
+
+from . import app
+
 
 @app.get('/status')
 def status():
@@ -31,13 +35,12 @@ async def preprocess(request: PreprocessItem):
         brand_name = preprocessor.preprocess_categorical(x_train["brand_name"])
         price_usd = preprocessor.preprocess_numerical(x_train["price_usd"])
 
-
         dataset = pd.DataFrame({"review_text": review_text,
                                 "review_title": review_title,
                                 "brane_name": brand_name,
                                 "price_usd": price_usd})
-        print(dataset)
-        output = preprocessor.save_data(output)
+        
+        output = preprocessor.save_data(dataset, "x_train_preprocessed.csv")
     else:
         output = "Preprocessing has already been performed."
 

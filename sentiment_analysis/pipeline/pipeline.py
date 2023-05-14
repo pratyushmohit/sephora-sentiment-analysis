@@ -39,7 +39,7 @@ class Pipeline(BasePipeline):
                                             index_col="Unnamed: 0")
             x.reset_index(inplace=True, drop=True)
 
-        #To do: Try to generalize the following code for account for any type of feature and for train set of test
+        #To do: Try to generalize the following code to account for any type of feature and for train set or test
         tokenizer_review_text, vocab_review_text, size_of_vocab_review_text = preprocessor.tokenization(x["review_text"])
         embedding_matrix_review_text = preprocessor.glove_embedding(vocab_review_text, size_of_vocab_review_text, 300)
         max_len_review_text = max([len(datapoint.split()) for datapoint in x["review_text"]])

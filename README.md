@@ -1,7 +1,7 @@
 # sephora-sentiment-analysis
 Sentiment Analysis on the Sephora Product and Skincare Reviews
 
-![Sephora Sentiment Analyis](blob\cover.jpg)
+![Sephora Sentiment Analyis](https://github.com/pratyushmohit/sephora-sentiment-analysis/blob/main/blob/cover.jpg)
 
 1. Download Sephora Products and Skincare Reviews dataset [here](https://www.kaggle.com/datasets/nadyinky/sephora-products-and-skincare-reviews). 
 

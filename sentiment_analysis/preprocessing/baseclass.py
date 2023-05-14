@@ -10,11 +10,19 @@ class BasePreprocessor(ABC):
         pass
 
     @abstractmethod
-    async def preprocess(self) -> None:
+    async def preprocess_text(self) -> None:
         pass
 
     @abstractmethod
-    async def preprocess_batch(self) -> None:
+    async def preprocess_text_batch(self) -> None:
+        pass
+
+    @abstractmethod
+    async def preprocess_categorical(self) -> None:
+        pass
+    
+    @abstractmethod
+    async def preprocess_numerical(self) -> None:
         pass
 
     @abstractmethod

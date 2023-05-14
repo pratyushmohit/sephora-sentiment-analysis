@@ -1,6 +1,5 @@
-from baseclass import BasePreprocessor
+from sentiment_analysis.preprocessing.baseclass import BasePreprocessor
 import pandas as pd
-from typing import Coroutine, Any
 from sklearn.model_selection import train_test_split
 import re
 import contractions
@@ -16,7 +15,7 @@ class Preprocessor(BasePreprocessor):
         self.y_train = None
         self.y_test = None
 
-    async def ingest(self):
+    def ingest(self):
         list_of_dataframes = []
 
         if len(self.path) == 1:
@@ -32,7 +31,7 @@ class Preprocessor(BasePreprocessor):
         
         return self.dataset
     
-    async def split_data(self):
+    def split_data(self):
         #only working with these features for now
         self.dataset = self.dataset.loc[:, ["rating", "review_text", "review_title", "brand_name", "price_usd"]]
         self.dataset.dropna(inplace=True)
@@ -44,21 +43,28 @@ class Preprocessor(BasePreprocessor):
 
         return self.x_train, self.x_test, self.y_train, self.y_test
     
-    async def preprocess(self, input_text):
+    def preprocess_text(self, input_text):
         input_text = contractions.fix(input_text)
         input_text = re.sub('\W+',' ', input_text)
         preprocessed_text = input_text.lower()
         return preprocessed_text
     
-    async def preprocess_batch(self, batch):
+    def preprocess_text_batch(self, batch):
         batch_output = []
         
         for item in tqdm(batch):
-            output = self.preprocess(item)
+            output = self.preprocess_text(item)
             batch_output.append(output)
+
         return batch_output
     
-    async def save_data(self, data, filname):
+    def preprocess_categorical(self, feature_vector):
+        return feature_vector
+
+    def preprocess_numerical(self, feature_vector):
+        return feature_vector
+    
+    def save_data(self, data, filname):
         if type(data) == list:
             data = pd.DataFrame(data)
             path = f"sentiment_analysis\data\preprocessed_data\ + {filname}"

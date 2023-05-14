@@ -27,13 +27,13 @@ class Pipeline(BasePipeline):
             price_usd = preprocessor.preprocess_numerical(x_train, "price_usd")
             y = preprocessor.preprocess_y(y_train)
 
-            dataset = pd.DataFrame({"review_text": review_text,
+            x = pd.DataFrame({"review_text": review_text,
                                     "review_title": review_title,
-                                    "brane_name": brand_name,
+                                    "brand_name": brand_name,
                                     "price_usd": price_usd})
             
-            preprocessor.save_data(dataset, "x_train_preprocessed.csv")
-            preprocessor.save_data(dataset, "y_train.npy")
+            preprocessor.save_data(x, "x_train_preprocessed.csv")
+            preprocessor.save_data(y, "y_train.npy")
         else:
             x = pd.read_csv("sentiment_analysis\\data\preprocessed_data\\x_train_preprocessed.csv", 
                                             index_col="Unnamed: 0")

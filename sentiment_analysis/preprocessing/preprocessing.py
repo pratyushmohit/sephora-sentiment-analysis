@@ -23,7 +23,6 @@ class Preprocessor(BasePreprocessor):
 
     def ingest(self):
         list_of_dataframes = []
-        print(type(self.path))
 
         if len(self.path) == 1:
             self.dataset = pd.read_csv(self.path)
@@ -68,7 +67,6 @@ class Preprocessor(BasePreprocessor):
     
     def preprocess_categorical(self, batch, feature):
         batch = batch[feature]
-        print(batch.unique())
         return batch
 
     def preprocess_numerical(self, batch, feature):
@@ -110,9 +108,11 @@ class Preprocessor(BasePreprocessor):
         return padded_sequences
     
     def save_data(self, dataframe, filename):
+        path = f"sentiment_analysis\data\preprocessed_data\{filename}"
+
         if isinstance(dataframe, np.ndarray):
-            np.save(filename, dataframe, allow_pickle=True, fix_imports=True)
+            np.save(path, dataframe, allow_pickle=True, fix_imports=True)
         else:
-            path = f"sentiment_analysis\data\preprocessed_data\{filename}"
             dataframe.to_csv(path)
+            
         return f"Data saved to {path}"

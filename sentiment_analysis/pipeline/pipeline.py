@@ -40,20 +40,36 @@ class Pipeline(BasePipeline):
             x.reset_index(inplace=True, drop=True)
 
         #To do: Try to generalize the following code to account for any type of feature and for train set or test
+        data_config = {"review_text": {},
+                       "review_title": {},
+                       "brand_name": {}}
+        
         tokenizer_review_text, vocab_review_text, size_of_vocab_review_text = preprocessor.tokenization(x["review_text"])
         embedding_matrix_review_text = preprocessor.glove_embedding(vocab_review_text, size_of_vocab_review_text, 300)
         max_len_review_text = max([len(datapoint.split()) for datapoint in x["review_text"]])
         sequences_review_text = tokenizer_review_text.texts_to_sequences(x["review_text"])
         padded_sequences_review_text = preprocessor.padding(sequences_review_text, max_len_review_text)
+        data_config["review_text"]["max_len"] = max_len_review_text
+        data_config["review_text"]["size_of_vocab"] = size_of_vocab_review_text
+
 
         tokenizer_review_title, vocab_review_title, size_of_vocab_review_title = preprocessor.tokenization(x["review_title"])
         embedding_matrix_review_title = preprocessor.glove_embedding(vocab_review_title, size_of_vocab_review_title, 50)
         max_len_review_title = max([len(datapoint.split()) for datapoint in x["review_title"]])
-        sequences_review_title = tokenizer_review_title.texts_to_sequences(x["review_text"])
+        sequences_review_title = tokenizer_review_title.texts_to_sequences(x["review_title"])
         padded_sequences_review_title = preprocessor.padding(sequences_review_title, max_len_review_title)
+        data_config["review_title"]["max_len"] = max_len_review_text
+        data_config["review_title"]["size_of_vocab"] = size_of_vocab_review_text
 
         tokenizer_brand_name, vocab_brand_name, size_of_vocab_brand_name = preprocessor.tokenization(x["brand_name"])
+        max_len_brand_name = max([len(datapoint.split()) for datapoint in x["brand_name"]])
         sequences_brand_name = np.array(tokenizer_brand_name.texts_to_sequences(x['brand_name']))
+        data_config["brand_name"]["max_len"] = max_len_brand_name
+        data_config["brand_name"]["size_of_vocab"] = size_of_vocab_brand_name
+
+        data_config = json.dumps(data_config, indent=4)
+        with open("sentiment_analysis\\model\\data_config.json", "w") as output_file:
+            output_file.write(data_config)
 
         price_usd = x["price_usd"]
 

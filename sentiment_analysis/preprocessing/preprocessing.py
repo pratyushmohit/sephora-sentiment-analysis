@@ -67,6 +67,8 @@ class Preprocessor(BasePreprocessor):
     
     def preprocess_categorical(self, batch, feature):
         batch = batch[feature]
+        batch = re.sub('\W+',' ', batch)
+        batch = batch.lower()
         return batch
 
     def preprocess_numerical(self, batch, feature):
@@ -114,5 +116,5 @@ class Preprocessor(BasePreprocessor):
             np.save(path, dataframe, allow_pickle=True, fix_imports=True)
         else:
             dataframe.to_csv(path)
-            
+
         return f"Data saved to {path}"

@@ -28,9 +28,8 @@ async def preprocess(request: PreprocessItem):
 
 @app.post('/train')
 async def train(request: TrainModelItem):
-    filenames = request.dict()
-    filenames = filenames["filenames"]
-    pipeline = Pipeline(filenames)
+    request = request.dict()
+    pipeline = Pipeline(request)
     output = pipeline.model_pipeline()
     return Response(content=output, media_type='application/json')
 

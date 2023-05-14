@@ -1,5 +1,6 @@
 # sephora-sentiment-analysis
-Sentiment Analysis on the Sephora Product and Skincare Reviews
+
+# Sentiment Analysis on the Sephora Product and Skincare Reviews
 
 ![Sephora Sentiment Analyis](https://github.com/pratyushmohit/sephora-sentiment-analysis/blob/main/blob/cover.jpg)
 

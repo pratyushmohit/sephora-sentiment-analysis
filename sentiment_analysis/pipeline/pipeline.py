@@ -63,7 +63,7 @@ class Pipeline(BasePipeline):
 
         tokenizer_brand_name, vocab_brand_name, size_of_vocab_brand_name = preprocessor.tokenization(x["brand_name"])
         max_len_brand_name = max([len(datapoint.split()) for datapoint in x["brand_name"]])
-        sequences_brand_name = np.array(tokenizer_brand_name.texts_to_sequences(x['brand_name']))
+        sequences_brand_name = np.array(tokenizer_brand_name.texts_to_sequences(x['brand_name']), dtype=object)
         data_config["brand_name"]["max_len"] = max_len_brand_name
         data_config["brand_name"]["size_of_vocab"] = size_of_vocab_brand_name
 

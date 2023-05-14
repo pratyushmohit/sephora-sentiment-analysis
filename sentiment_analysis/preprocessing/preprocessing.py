@@ -70,7 +70,7 @@ class Preprocessor(BasePreprocessor):
         batch = batch[feature]
 
         for item in tqdm(batch):
-            item = re.sub('\W+','_', item)
+            item = re.sub('\W+',' ', item)
             item = item.lower()  
             batch_output.append(item)
 

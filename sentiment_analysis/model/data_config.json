@@ -1,11 +1,11 @@
 {
     "review_text": {
         "max_len": 1291,
-        "size_of_vocab": 78265
+        "size_of_vocab": 78371
     },
     "review_title": {
-        "max_len": 1291,
-        "size_of_vocab": 78265
+        "max_len": 17,
+        "size_of_vocab": 20710
     },
     "brand_name": {
         "max_len": 5,

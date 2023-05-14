@@ -58,8 +58,8 @@ class Pipeline(BasePipeline):
         max_len_review_title = max([len(datapoint.split()) for datapoint in x["review_title"]])
         sequences_review_title = tokenizer_review_title.texts_to_sequences(x["review_title"])
         padded_sequences_review_title = preprocessor.padding(sequences_review_title, max_len_review_title)
-        data_config["review_title"]["max_len"] = max_len_review_text
-        data_config["review_title"]["size_of_vocab"] = size_of_vocab_review_text
+        data_config["review_title"]["max_len"] = max_len_review_title
+        data_config["review_title"]["size_of_vocab"] = size_of_vocab_review_title
 
         tokenizer_brand_name, vocab_brand_name, size_of_vocab_brand_name = preprocessor.tokenization(x["brand_name"])
         max_len_brand_name = max([len(datapoint.split()) for datapoint in x["brand_name"]])

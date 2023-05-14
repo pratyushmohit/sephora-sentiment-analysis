@@ -16,3 +16,7 @@ class BasePreprocessor(ABC):
     @abstractmethod
     async def preprocess_batch(self) -> None:
         pass
+
+    @abstractmethod
+    async def save_data(self) -> None:
+        pass

@@ -57,3 +57,10 @@ class Preprocessor(BasePreprocessor):
             output = self.preprocess(item)
             batch_output.append(output)
         return batch_output
+    
+    async def save_data(self, data, filname):
+        if type(data) == list:
+            data = pd.DataFrame(data)
+            path = f"sentiment_analysis\data\preprocessed_data\ + {filname}"
+            data.to_csv(path)
+        return f"Data saved to {path}"

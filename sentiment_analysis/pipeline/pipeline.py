@@ -112,7 +112,12 @@ class Pipeline(BasePipeline):
         numerical_feature = self.input["numerical_feature"]
         class_label = self.input["class_label"]
 
-        with open('data_config.json') as json_file:
+        with open("sentiment_analysis\model\data_config.json") as json_file:
             data_config = json.load(json_file)
         
-        model = SentimentAnalysisModel()
+        with open("sentiment_analysis\model\model_config.json") as json_file:
+            model_config = json.load(json_file)
+        
+        model = SentimentAnalysisModel(embeddings, sequences, numerical_feature, class_label, data_config, model_config)
+        history = model.model()
+        return history
